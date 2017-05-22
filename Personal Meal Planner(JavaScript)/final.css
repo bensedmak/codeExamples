@@ -1,0 +1,110 @@
+.null{
+
+background: repeating-linear-gradient(
+  0deg,
+  #444444,
+  #888888 70px,
+  #444444 20px,
+  #888888 20px
+);
+	min-width: 35px;
+
+
+opacity:0.15;
+
+}
+
+.empty{
+
+	background-color: snow;
+	height:60px;
+	max-width: 60px;
+	max-height: 60px;
+	opacity:.7;
+	min-width: 35px;
+
+	
+}
+
+
+.eaten{
+
+	background-color: mediumseagreen;
+	border: 1px solid lightgray;
+	height:60px;
+	min-width: 35px;
+	max-height: 60px;
+	font-size:20px;
+	color: black;
+}
+
+td{
+	background-color: lightgray;
+	border: 1px solid white;
+
+	
+}
+
+#title_row {
+
+background: repeating-linear-gradient(
+  0deg,
+  snow,
+  mediumaquamarine 40px,
+  palegreen 10px,
+  snow 10px
+);
+
+}
+#total_calories_box{
+	font-size:35px;
+}
+
+#std_row{
+	font-size: 25px;
+	text-align: center;
+
+}
+
+button{
+
+	width: 100%;
+	height: 10%;
+	font-size: 50px;
+	opacity:.8;
+	border-radius: 2px;
+	background-color: lightgray;
+}
+
+select{
+	border-radius: 2px;
+	width: 100%;
+	height: 65px;
+	font-size: 50px;
+	opacity:.8;
+	
+}
+
+#serv_select{
+	width: 25%;
+
+}
+html{
+	font-family: "helvetica";
+	font-size: 30px;
+}
+body{
+background: repeating-linear-gradient(
+  45deg,
+  whitesmoke,
+  lightskyblue 50%,
+  white 20%,
+  white 20%
+);
+background-attachment:fixed;
+}
+table{
+	width: 100%;
+	border: 2px solid darkgray;
+	opacity: .9;
+}

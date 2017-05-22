@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Device Database</title>
+</head>
+<body onload="page_load()">
+    {% include "home/Header.html" %}
+
+    <form action="{% url 'admintools:device_database' %}" method="post" id="devices_form">
+        {% csrf_token %}
+
+    <table>
+        <tr class="row" id="title_row">
+            <th class="invisible"></th><th>&nbsp;Device Name&nbsp;</th><th>&nbsp;IP Address&nbsp;</th>
+            <th>&nbsp;Device Type&nbsp;</th><th>&nbsp;OS Version&nbsp;</th><th></th></tr>
+    {% for device in device_list %}
+        <tr class="row">
+            <td>&nbsp;
+                <input type="checkbox" align="center" id="{{device.ip_address}}_box" class="check_box submit_button"
+                       name="{{device.ip_address}}_box">&nbsp;
+            </td>
+            <td>
+                <label for="{{device.ip_address}}_name_box" id="{{device.ip_address}}_name_box">{{device.device_name}}
+                    </label>
+                <input type="hidden" size="12" id="{{device.ip_address}}_input_box"
+                       name="{{device.ip_address}}_name_box"/>
+
+            </td>
+            <td>{{device.ip_address}}</td>
+            <td>
+                <label for="{{device.ip_address}}_type_box" id="{{device.ip_address}}_type_box">{{device.device_type}}
+                </label>
+                <input type="hidden" size="12" id="{{device.ip_address}}_type_input_box"
+                       name="{{device.ip_address}}_type_input_box" />
+            </td>
+            <td>
+                {{device.os_version}}
+            </td>
+            <td>
+                <input type="button" class="edit_button" name="{{device.ip_address}}" id="{{device.device_name}}"
+                       value="&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;" />
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+    <span id="delete_devices_button" class="invisible">
+        <input type="submit" name="action" onclick="return confirm('Are you sure?')"
+            id="delete_devices_b" class="submit_button" value="Delete Devices"/>
+    </span>
+
+    </form><br>
+
+    <button id="add_device_button_reveal" class="submit_button">Add Device</button><br>
+
+        <form action="{% url 'admintools:device_database' %}" method="post" id="add_device_form" class="invisible">
+        {% csrf_token %}
+            <ul>
+                <li>
+                    <h4><label><b>Add Device</b></label></h4>
+                </li>
+                <li>
+                    <label for="device_name">Device Name:</label>
+                    <input type="text" id="device_name" name="device_name"/>
+                </li>
+                <li>
+                    <label for="ip_address">IP Address:</label>
+                    <input type="text" id="ip_address" name="ip_address"/>
+                </li>
+                <li>
+                    <label for="device_type">Device Type:</label>
+                    <input type="" id="device_type" name="device_type"/>
+                </li>
+                <li class="submit_button_li"><span class="submit_padding"></span>
+                    <input type="button" class="submit_button" id="add_device_button" value="Submit"/>
+                </li>
+            </ul>
+    </form>
+
+    <script>
+        {% include 'admintools/device_database_script.js' %}
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Initial Setup</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type = "text/css"/>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css"/>
+</head>
+<body onload="page_load()">
+    <h2>Initial Setup</h2>
+    <h4>Please set up an administrator with username and password:</h4>
+    <form action="{% url 'home:initialize' %}" method="post">
+        {% csrf_token %}
+        <ul>
+            <li>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" value="{{username}}" onKeyUp="check_values()"/>
+            </li>
+            <li>
+                <label for="email_address">Email Address:</label>
+                <input type="email" id="email_address" name="email_address" onKeyUp="check_values()"/>
+            </li>
+            <li>
+                <label for="password">New Password:</label>
+                <input type="password" id="password" name="password" onKeyUp="check_values()"/>
+            </li>
+            <li>
+                <label for="confirm_password">Confirm New Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" onKeyUp="check_values()"/>
+            </li>
+            <li><span class="submit_padding"></span>
+                <span id="password_test">Password must be 8 characters or longer.</span>
+            </li>
+            <li>
+                <label for="community_string">Community String (optional):</label>
+                <input type="text" id="community_string" name="community_string"/>
+            </li>
+
+            <li class="submit_button_li"><span class="submit_padding"></span>
+                <input type="submit" class="submit_button" id="submit" disabled=true value="Register"/>
+            </li>
+        </ul>
+    </form>
+
+
+    <script>
+
+        var username = document.querySelector("#username");
+        var email = document.querySelector("#email_address");
+        var password_test = document.querySelector("#password_test");
+        var password = document.querySelector("#password");
+        var confirm_password = document.querySelector("#confirm_password");
+        var submit_button = document.querySelector("#submit");
+
+        function check_values(){
+            if (password.value != confirm_password.value){
+                password_test.innerHTML = "Passwords do not match.";
+                submit_button.disabled = true;
+            }
+            else{
+                if (password.value.length < 8){
+                    password_test.innerHTML = "Password must be 8 characters or longer.";
+                    submit_button.disabled = true;
+                }
+                else{
+                    password_test.innerHTML = "✔";
+                    if (email.value == "" || username.value == ""){
+                        submit_button.disabled = true;
+                    }
+                    else{
+                        submit_button.disabled = false;
+                    }
+                }
+            }
+
+
+
+        }
+
+        function page_load() {
+            if ("{{message}}" != ""){
+            alert("{{message}}");
+            }
+        }
+
+    </script>
+
+</body>
+</html>

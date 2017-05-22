@@ -1,0 +1,34 @@
+{% load staticfiles %}
+
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type = "text/css"/>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css"/>
+	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
+    <h2 id="main_menu">
+        <a onclick="show_main_menu()" id="main_menu_button">☰ Menu</a>
+        <span id="header_bar">
+            <a href="/">
+                <button class="header_button">Home</button>
+            </a>
+            <a>
+                <button class="header_button" onmouseover="show_tools_menu()" onmouseout="hide_tools_menu()">
+                    <span id="tools_menu">Tools</span>
+                </button>
+            </a>
+            {% if is_admin == "True" %}
+                <a>
+                    <button class="header_button" onmouseover="show_admin_tools_menu()" onmouseout="hide_admin_tools_menu()">
+                        <span id="admin_tools_menu" >Admin Tools</span>
+                    </button>
+                </a>
+            {% endif %}
+            <a href="/user_options">
+                <button class="header_button">User Options</button>
+            </a>
+            <a href="{% url 'home:logout' %}">
+                <button class="header_button">Logout</button>
+            </a>
+        </span>
+    </h2>
+<script>
+    {% include 'home/headerScript.js' %}
+</script>
